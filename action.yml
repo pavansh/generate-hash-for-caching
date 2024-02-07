@@ -1,0 +1,27 @@
+name: "File Renamer Action"
+description: "A GitHub Action to update HTML files and rename associated files with hash."
+inputs:
+  input:
+    description: "Input HTML file"
+    required: true
+    default: "index.html"
+  output:
+    description: "Output HTML file"
+    required: true
+    default: "updated_index.html"
+  replace:
+    description: "Comma-separated list of files to replace"
+    required: true
+    default: "app.js,styles.css"
+  workdir:
+    description: "Directory of Web Build"
+    required: true
+    default: "."
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - "-input=${{ inputs.input }}"
+    - "-output=${{ inputs.output }}"
+    - "-replace=${{ inputs.replace }}"
+    - "-workdir=${{ inputs.workdir }}"
